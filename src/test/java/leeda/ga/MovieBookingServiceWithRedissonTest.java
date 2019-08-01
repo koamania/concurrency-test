@@ -19,15 +19,16 @@ public class MovieBookingServiceWithRedissonTest {
 
     @Autowired
     private RedissonClient redissonClient;
+    private final Random random = new Random();
 
     @Test
     public void bookMovieTest() throws InterruptedException {
         MovieBookingServiceWithRedisson service = new MovieBookingServiceWithRedisson(redissonClient);
         int max = 60;
         ExecutorService executorService = Executors.newFixedThreadPool(max);
-        final Random random = new Random();
+
         AtomicInteger userNo = new AtomicInteger(0);
-        for (int i = 0; i < max ; i++) {
+        for (int i = 0; i < max; i++) {
             executorService.execute(() -> {
 
                 int seatNo = random.nextInt(max) + 1;

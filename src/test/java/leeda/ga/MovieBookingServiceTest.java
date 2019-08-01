@@ -1,6 +1,5 @@
 package leeda.ga;
 
-import leeda.ga.MovieBookingService;
 import org.junit.Test;
 
 import java.util.Random;
@@ -10,14 +9,16 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class MovieBookingServiceTest {
+    private final Random random = new Random();
+
     @Test
     public void bookMovieTest() throws InterruptedException {
         MovieBookingService service = new MovieBookingService();
         int max = 60;
         ExecutorService executorService = Executors.newFixedThreadPool(max);
-        final Random random = new Random();
+
         AtomicInteger userNo = new AtomicInteger(0);
-        for (int i = 0; i < max ; i++) {
+        for (int i = 0; i < max; i++) {
             executorService.execute(() -> {
 
                 int seatNo = random.nextInt(max) + 1;
